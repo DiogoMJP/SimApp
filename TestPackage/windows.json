@@ -1,0 +1,32 @@
+[
+    {
+        "name" : "Text List",
+        "type" : "StructuredDisplay",
+        "vars" : {
+            "id" : 0
+        },
+        "actions" : {
+            "New File" : {"action": "new_text", "parameters": ["length"]},
+            "Delete File" : {"action": "delete_text", "parameters": []}
+        },
+        "display_elements" : []
+    },
+    {
+        "name" : "Text Editor",
+        "type" : "StructuredDisplay",
+        "vars" : {
+            "id" : 0,
+            "title" : "",
+            "text" : ""
+        },
+        "actions" : {
+            "Save File" : {"action": "save_text", "parameters": ["id", "title", "text"]},
+            "Exit Editor" : {"action": "exit_editor", "parameters": []}
+        },
+        "display_elements" : [
+            {"type": "text_input", "var": "title", "min": 1, "max": 32, "n_lines": 1},
+            {"type": "text_input", "var": "text", "min": 1, "max": 2048, "n_lines": 16},
+            {"type": "button", "text": "Save File", "on_click": {"action": "save_text", "parameters": ["id", "title", "text"]}}
+        ]
+    }
+]
