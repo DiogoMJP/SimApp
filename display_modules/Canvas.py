@@ -1,30 +1,28 @@
 import tkinter as tk
 
-from display_modules.DisplayModule import DisplayModule
+from display_modules import DisplayModule
 
 
 
-class Canvas(DisplayModule):
-	def __init__(self, parent, data):
-		super().__init__(parent, data)
-
-		self.set_window()
+class Canvas(DisplayModule.DisplayModule):
+	def __init__(self, app, parent, data):
+		super().__init__(app, parent, data)
 
 		self.width = 800
 		self.height = 600
 		self.start_drag_x = 0
 		self.start_drag_y = 0
 
-		self.set_variable("zoom", 1)
-		self.set_variable("x", 0)
-		self.set_variable("y", 0)
+		self.set_variable_value("zoom", 1)
+		self.set_variable_value("x", 0)
+		self.set_variable_value("y", 0)
 
 		self.draw_funcs = {
 			"line" : lambda d : self.draw_line(d["points"], d["fill"], d["dash"]),
 			"rect" : lambda d : self.draw_rectangle(d["points"], d["fill"])
 		}
 	
-	def set_window(self):
+	def display_self(self):
 		self.canvas = tk.Canvas(self.parent)
 		self.canvas.pack(fill="both", expand=1)
 		self.canvas.bind("<MouseWheel>", self.canvas_zoom)
@@ -45,8 +43,8 @@ class Canvas(DisplayModule):
 		self.start_drag_y = event.y
 
 	def canvas_drag(self, event):
-		self.set_variable("x", self.get_variable("x") + event.x - self.start_drag_x)
-		self.set_variable("y", self.get_variable("y") + event.y - self.start_drag_y)
+		self.set_variable_value("x", self.get_variable_value("x") + event.x - self.start_drag_x)
+		self.set_variable_value("y", self.get_variable_value("y") + event.y - self.start_drag_y)
 		self.start_drag_x = event.x
 		self.start_drag_y = event.y
 		self.render()
@@ -55,8 +53,8 @@ class Canvas(DisplayModule):
 	def draw_line(self, points, fill="#000", dash=(1, 0)):
 		midpoint = (self.width // 2, self.height // 2)
 		points = [
-			(self.get_variable("x") + midpoint[0] + (x - midpoint[0]) * self.get_variable("zoom"),
-			 self.get_variable("y") + midpoint[1] + (y - midpoint[1]) * self.get_variable("zoom"))
+			(self.get_variable_value("x") + midpoint[0] + (x - midpoint[0]) * self.get_variable_value("zoom"),
+			 self.get_variable_value("y") + midpoint[1] + (y - midpoint[1]) * self.get_variable_value("zoom"))
 			 for x, y in points
 		]
 		self.canvas.create_line(points, fill=fill, dash=dash)
@@ -64,8 +62,8 @@ class Canvas(DisplayModule):
 	def draw_rectangle(self, points, fill="#000"):
 		midpoint = (self.width // 2, self.height // 2)
 		points = [
-			(self.get_variable("x") + midpoint[0] + (x - midpoint[0]) * self.get_variable("zoom"),
-			 self.get_variable("y") + midpoint[1] + (y - midpoint[1]) * self.get_variable("zoom"))
+			(self.get_variable_value("x") + midpoint[0] + (x - midpoint[0]) * self.get_variable_value("zoom"),
+			 self.get_variable_value("y") + midpoint[1] + (y - midpoint[1]) * self.get_variable_value("zoom"))
 			 for x, y in points
 		]
 		self.canvas.create_rectangle(points, fill=fill)

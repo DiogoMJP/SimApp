@@ -4,7 +4,7 @@ from tkinter import filedialog
 import tkinter as tk
 
 from Consts import *
-from display_modules.Canvas import Canvas
+from display_modules import Canvas, StructuredDisplay
 
 
 
@@ -20,6 +20,12 @@ class SimApp():
 		self.open_file_name = None
 		self.display_modules = None
 		self.active_display_module = None
+		self.display_module_objects = {}
+
+		self.display_modules_from_type_string = {
+			"Canvas" : Canvas.Canvas,
+			"StructuredDisplay" : StructuredDisplay.StructuredDisplay
+		}
 
 		self.window.mainloop()
 	
@@ -64,7 +70,9 @@ class SimApp():
 		self.package = module.Package(self)
 		self.display_modules = self.package.get_display_modules()
 		self.active_display_module = self.package.get_active_display_module()
-		print(self.package)
+		for display_module in self.display_modules:
+			self.display_module_objects[display_module["name"]] = self.display_modules_from_type_string[display_module["type"]](self, self.window, display_module)
+		self.display_module_objects[self.active_display_module].display_self()
 
 
 	def set_variables_window(self):

@@ -3,14 +3,18 @@ from abc import ABC, abstractmethod
 
 
 class DisplayModule(ABC):
-	def __init__(self, parent, data):
+	def __init__(self, app, parent, data):
+		self.app = app
 		self.parent = parent
 		self.data = data
 	
 
-	@abstractmethod
-	def set_window(self):
-		pass
+	def get_app(self):
+		return self.app
+
+
+	def get_parent(self):
+		return self.parent
 
 
 	def get_type(self):
@@ -19,10 +23,18 @@ class DisplayModule(ABC):
 
 	def get_variables(self):
 		return self.data["vars"]
-	
+
 	def get_variable(self, var_name):
-		if var_name in self.data["vars"].keys():
-			return self.data["vars"][var_name]
+		variable = [var for var in self.data["vars"] if var["name"] == var_name]
+		if len(variable) != 0:
+			return variable[0]
+		else:
+			return None
+	
+	def get_variable_value(self, var_name):
+		variable = [var for var in self.data["vars"] if var["name"] == var_name]
+		if len(variable) != 0:
+			return variable[0]["value"]
 		else:
 			return None
 
@@ -49,3 +61,8 @@ class DisplayModule(ABC):
 
 	def __str__(self):
 		return str(self.data)
+	
+
+	@abstractmethod
+	def display_self(self):
+		pass

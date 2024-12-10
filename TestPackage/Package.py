@@ -19,7 +19,7 @@ class Package():
 	def create_display_modules(self):
 		with open(os.path.dirname(__file__) + "/windows.json", "r") as file:
 			self.display_modules = json.load(file)
-		self.active_display_module = "Text List"
+		self.active_display_module = "Text Editor"
 	
 	def get_display_modules(self):
 		return self.display_modules
