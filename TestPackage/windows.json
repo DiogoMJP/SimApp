@@ -1,5 +1,17 @@
 [
     {
+        "name" : "Text List",
+        "type" : "StructuredDisplay",
+        "vars" : [
+            {"name": "id", "value": 0, "editable": false}
+        ],
+        "actions" : {
+            "New File" : {"action": "new_text", "parameters": ["length"]},
+            "Delete File" : {"action": "delete_text", "parameters": []}
+        },
+        "display_elements" : []
+    },
+    {
         "name" : "Text Editor",
         "type" : "StructuredDisplay",
         "vars" : [

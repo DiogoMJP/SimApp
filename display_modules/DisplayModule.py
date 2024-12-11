@@ -42,6 +42,8 @@ class DisplayModule(ABC):
 		for i, _ in enumerate(self.data["vars"]):
 			if self.data["vars"][i]["name"] == var_name: 
 				self.data["vars"][i]["value"] = var_val
+				return
+		self.data["vars"] += [{"name": var_name, "value": var_val, "editable": False}]
 	
 
 	def call_action(self, action):
