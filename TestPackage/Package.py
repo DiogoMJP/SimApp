@@ -40,7 +40,7 @@ class Package():
 		pass
 
 	def save_text(self, vars):
-		print(vars)
+		self.app.set_active_display_module("Text List")
 
 	def exit_editor(self, vars):
 		pass

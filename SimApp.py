@@ -55,6 +55,9 @@ class SimApp():
 		helpmenu = tk.Menu(menu)
 		menu.add_cascade(label="Help", menu=helpmenu)
 		helpmenu.add_command(label="About")
+		
+		self.frame = tk.Frame(self.window)
+		self.frame.pack(expand=True, fill="both")
 	
 
 	def open_file(self):
@@ -71,7 +74,18 @@ class SimApp():
 		self.display_modules = self.package.get_display_modules()
 		self.active_display_module = self.package.get_active_display_module()
 		for display_module in self.display_modules:
-			self.display_module_objects[display_module["name"]] = self.display_modules_from_type_string[display_module["type"]](self, self.window, display_module)
+			self.display_module_objects[display_module["name"]] = self.display_modules_from_type_string[display_module["type"]](self, self.frame, display_module)
+		self.display_module_objects[self.active_display_module].display_self()
+	
+
+	def clear_window(self):
+		for widget in self.frame.winfo_children():
+			widget.destroy()
+
+
+	def set_active_display_module(self, new_name):
+		self.active_display_module = new_name
+		self.clear_window()
 		self.display_module_objects[self.active_display_module].display_self()
 
 
