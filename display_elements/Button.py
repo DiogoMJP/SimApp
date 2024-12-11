@@ -11,5 +11,9 @@ class Button(DisplayElement.DisplayElement):
 
     def display_self(self):
         parent = self.get_parent()
-        self.input = tk.Button(parent, text=self.get_value("text"))
+        self.input = tk.Button(parent, text=self.get_value("text"), command=self.call_action)
         self.input.pack()
+
+
+    def call_action(self):
+        self.get_display_module().call_action(self.get_value("on_click"))

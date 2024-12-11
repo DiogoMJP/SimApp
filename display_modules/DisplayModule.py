@@ -39,8 +39,14 @@ class DisplayModule(ABC):
 			return None
 
 	def set_variable(self, var_name, var_val):
-		self.data["vars"][var_name] = var_val
+		for i, _ in enumerate(self.data["vars"]):
+			if self.data["vars"][i]["name"] == var_name: 
+				self.data["vars"][i]["value"] = var_val
 	
+
+	def call_action(self, action):
+		self.get_app().call_action(action, [self.get_variable(v) for v in action["parameters"]])
+
 
 	def get_actions(self):
 		return self.data["actions"]

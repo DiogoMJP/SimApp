@@ -81,8 +81,8 @@ class SimApp():
 		pop_up.geometry("400x300")
 	
 
-	def call_action(self, action, parameters, vars):
-		self.package.call_action(action, [vars[param] for param in parameters])
+	def call_action(self, action, vars):
+		self.package.call_action(action, vars)
 
 
 

@@ -32,6 +32,10 @@ class DisplayElement(ABC):
         self.data[var_name] = value
     
 
+    def set_variable(self, value):
+        self.get_display_module().set_variable(self.get_value("var"), value)
+    
+
     @abstractmethod
     def display_self(self):
         pass

@@ -20,5 +20,4 @@ class StructuredDisplay(DisplayModule):
         self.frame = tk.Frame(self.parent)
         for element in self.get_display_elements():
             self.display_elements[element["id"]] = self.display_element_from_type_string[element["type"]](self, self.frame, element)
-        self.frame.pack()
-        print(self.frame)
+        self.frame.pack(expand=1, fill="both")

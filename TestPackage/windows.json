@@ -8,13 +8,13 @@
             {"name": "text", "value": "", "editable": false}
         ],
         "actions" : {
-            "Save File" : {"action": "save_text", "parameters": ["id", "title", "text"]},
-            "Exit Editor" : {"action": "exit_editor", "parameters": []}
+            "Save File" : {"name": "save_text", "parameters": ["id", "title", "text"]},
+            "Exit Editor" : {"name": "exit_editor", "parameters": []}
         },
         "display_elements" : [
             {"id": "title_input", "label": "Title:", "type": "TextInput", "var": "title", "min": 1, "max": 16, "n_lines": 1},
             {"id": "text_input", "type": "TextInput", "var": "text", "min": 1, "max": 2048, "n_lines": 16},
-            {"id": "submit_button", "type": "Button", "text": "Save File", "on_click": {"action": "save_text", "parameters": ["id", "title", "text"]}}
+            {"id": "submit_button", "type": "Button", "text": "Save File", "on_click": {"name": "save_text", "parameters": ["id", "title", "text"]}}
         ]
     }
 ]

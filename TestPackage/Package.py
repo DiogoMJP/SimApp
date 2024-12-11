@@ -29,7 +29,7 @@ class Package():
 	
 
 	def call_action(self, action, vars):
-		self.actions[action](vars)
+		self.actions[action["name"]](vars)
 
 	def new_text(self, vars):
 		self.display_modules["Text Editor"]["vars"]["id"] = vars[0]
@@ -40,7 +40,7 @@ class Package():
 		pass
 
 	def save_text(self, vars):
-		pass
+		print(vars)
 
 	def exit_editor(self, vars):
 		pass

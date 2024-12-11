@@ -31,4 +31,4 @@ class TextInput(DisplayElement.DisplayElement):
             if len(val) > max_len:
                 self.input.delete(0, tk.END)
                 self.input.insert(0, val[:max_len])
-        #self.get_parent().set_variable(self.get_value("var"), val)
+        self.set_variable(val)
