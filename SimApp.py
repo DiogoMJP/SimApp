@@ -45,10 +45,8 @@ class SimApp():
 		filemenu.add_separator()
 		filemenu.add_command(label="Exit", command=self.window.quit)
 		menu.add_command(label="Set Variables", command=self.set_variables_window)
-		runmenu = tk.Menu(menu)
-		menu.add_cascade(label="Run", menu=runmenu)
-		runmenu.add_command(label="Run File")
-		runmenu.add_command(label="Run and Save File")
+		self.actionmenu = tk.Menu(menu)
+		menu.add_cascade(label="Run Action", menu=self.actionmenu)
 		popupmenu = tk.Menu(menu)
 		popupmenu.add_cascade(label="Pop Ups", menu=popupmenu)
 		tk.Label(popupmenu, text="None Available")
@@ -72,21 +70,29 @@ class SimApp():
 		module = importlib.import_module(self.open_file_name.split(".")[0])
 		self.package = module.Package(self)
 		self.display_modules = self.package.get_display_modules()
-		self.active_display_module = self.package.get_active_display_module()
 		for display_module in self.display_modules:
 			self.display_module_objects[display_module["name"]] = self.display_modules_from_type_string[display_module["type"]](self, self.frame, display_module)
-		self.display_module_objects[self.active_display_module].display_self()
+		self.set_active_display_module(self.package.get_active_display_module())
 	
 
 	def clear_window(self):
 		for widget in self.frame.winfo_children():
 			widget.destroy()
+	
+	def set_actions(self):
+		for action in self.actionmenu.winfo_children():
+			action.destroy()
+		self.actionmenu.children
+		actions = self.display_module_objects[self.active_display_module].get_actions()
+		print(actions)
+		for key in actions.keys():
+			self.actionmenu.add_command(label=key)
 
-
-	def set_active_display_module(self, new_name):
-		self.active_display_module = new_name
+	def set_active_display_module(self, module_name):
+		self.active_display_module = module_name
 		self.clear_window()
 		self.display_module_objects[self.active_display_module].display_self()
+		self.set_actions()
 
 
 	def set_variables_window(self):
