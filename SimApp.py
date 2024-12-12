@@ -80,13 +80,10 @@ class SimApp():
 			widget.destroy()
 	
 	def set_actions(self):
-		for action in self.actionmenu.winfo_children():
-			action.destroy()
-		self.actionmenu.children
+		self.actionmenu.delete(0, "end")
 		actions = self.display_module_objects[self.active_display_module].get_actions()
-		print(actions)
 		for key in actions.keys():
-			self.actionmenu.add_command(label=key)
+			self.actionmenu.add_command(label=key, command=lambda key=key: self.display_module_objects[self.active_display_module].call_action(actions[key]))
 
 	def set_active_display_module(self, module_name):
 		self.active_display_module = module_name

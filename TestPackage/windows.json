@@ -6,8 +6,8 @@
             {"name": "id", "value": 0, "editable": false}
         ],
         "actions" : {
-            "New File" : {"action": "new_text", "parameters": ["length"]},
-            "Delete File" : {"action": "delete_text", "parameters": []}
+            "New File" : {"name": "new_text", "parameters": ["length"]},
+            "Delete File" : {"name": "delete_text", "parameters": []}
         },
         "display_elements" : []
     },
