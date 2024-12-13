@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from data_objects import DataObject
 
 
 class DisplayModule(ABC):
@@ -56,7 +57,9 @@ class DisplayModule(ABC):
 		self.get_data().set_value("display_elements", {})
 	
 	def append_display_element(self, name, display_element):
-		self.get_data().get_by_value("display_elements").set_value(name, display_element)
+		if type(display_element) == dict:
+			display_element = DataObject.DataObject(display_element)
+		self.get_data().get_by_name("display_elements").set_value(name, display_element)
 	
 
 	def __str__(self):

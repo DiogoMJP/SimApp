@@ -45,3 +45,10 @@ class DataObject():
             self.data[name] = DataObject(value)
         else:
             self.data[name] = value
+
+
+    def __str__(self):
+        return self.__repr__()
+    
+    def __repr__(self):
+        return str(self.data)

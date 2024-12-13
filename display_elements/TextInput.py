@@ -13,7 +13,7 @@ class TextInput(DisplayElement.DisplayElement):
         parent = self.get_parent()
         label = self.get_value("label")
         if (label != None):
-            self.label = tk.Label(parent, text=label)
+            self.label = tk.Label(parent, text=label + ":")
             self.label.pack()
         else:
             self.label = None

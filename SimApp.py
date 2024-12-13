@@ -86,8 +86,11 @@ class SimApp():
 		for _, action in actions.get_items():
 			self.actionmenu.add_command(label=action.get_by_name("label"), command=lambda action=action: self.get_active_display_module().call_action(action))
 
+	def get_display_module(self, name):
+		return self.display_module_objects[name]
+
 	def get_active_display_module(self):
-		return self.display_module_objects[self.active_display_module]
+		return self.get_display_module(self.active_display_module)
 
 	def set_active_display_module(self, module_name):
 		self.active_display_module = module_name

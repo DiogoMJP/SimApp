@@ -24,7 +24,7 @@
             "exit_editor" : {"name": "exit_editor", "label": "Exit Editor", "parameters": []}
         },
         "display_elements" : {
-            "title_input" : {"name": "title_input", "label": "Title:", "type": "TextInput", "var": "title", "min": 1, "max": 16, "n_lines": 1},
+            "title_input" : {"name": "title_input", "label": "Title", "type": "TextInput", "var": "title", "min": 1, "max": 16, "n_lines": 1},
             "text_input" : {"name": "text_input", "type": "TextInput", "var": "text", "min": 1, "max": 2048, "n_lines": 16},
             "submit_button" : {"name": "submit_button", "type": "Button", "text": "Save File", "on_click": {"name": "save_text", "parameters": ["id", "title", "text"]}}
         }

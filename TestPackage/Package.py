@@ -32,7 +32,7 @@ class Package():
 		self.actions[action.get_by_name("name")](vars)
 
 	def new_text(self, vars):
-		self.app.get_data().get_by_path(["Text Editor", "vars", "id"]).set_value("value", vars[0])
+		self.app.get_data().get_by_path(["Text Editor", "vars", "id"]).set_value("value", vars[0].get_by_name("value"))
 		self.app.get_data().get_by_path(["Text Editor", "vars", "title"]).set_value("value", "")
 		self.app.get_data().get_by_path(["Text Editor", "vars", "text"]).set_value("value", "")
 		self.active_display_module = "Text Editor"
@@ -42,6 +42,13 @@ class Package():
 		pass
 
 	def save_text(self, vars):
+		self.app.get_display_module("Text List").append_display_element(vars[0].get_by_name("value"), {"name": vars[0].get_by_name("value"), "type": "Card", "vars": {
+			"id": {"name": "id", "label": "ID", "value": str(vars[0].get_by_name("value"))},
+			"title": {"name": "title", "label": "Title", "value": vars[1].get_by_name("value")},
+			"text": {"name": "text", "label": "Text", "value": vars[2].get_by_name("value")}
+		}})
+		self.app.get_data().get_by_path(["Text List", "vars", "id"]).set_value("value", vars[0].get_by_name("value") + 1)
+		self.active_display_module = "Text List"
 		self.app.set_active_display_module("Text List")
 
 	def exit_editor(self, vars):

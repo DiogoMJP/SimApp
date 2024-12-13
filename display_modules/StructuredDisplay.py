@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from display_elements import Button, TextInput
+from display_elements import Button, Card, TextInput
 from display_modules.DisplayModule import DisplayModule
 
 
@@ -10,8 +10,9 @@ class StructuredDisplay(DisplayModule):
         super().__init__(app, parent, data)
 
         self.display_element_from_type_string = {
-            "TextInput" : TextInput.TextInput,
-            "Button" : Button.Button
+            "Button" : Button.Button,
+            "Card" : Card.Card,
+            "TextInput" : TextInput.TextInput
         }
         self.display_elements = {}
 
