@@ -15,60 +15,52 @@ class DisplayModule(ABC):
 
 	def get_parent(self):
 		return self.parent
+	
+
+	def get_data(self):
+		return self.data
 
 
 	def get_type(self):
-		return self.data["type"]
+		return self.get_data().get_by_name("type")
 
 
 	def get_variables(self):
-		return self.data["vars"]
+		return self.get_data().get_by_name("vars")
 
 	def get_variable(self, var_name):
-		variable = [var for var in self.data["vars"] if var["name"] == var_name]
-		if len(variable) != 0:
-			return variable[0]
-		else:
-			return None
+		return self.get_data().get_by_path(["vars", var_name])
 	
 	def get_variable_value(self, var_name):
-		variable = [var for var in self.data["vars"] if var["name"] == var_name]
-		if len(variable) != 0:
-			return variable[0]["value"]
-		else:
-			return None
+		return self.get_data().get_by_path(["vars", var_name, "value"])
 
 	def set_variable(self, var_name, var_val):
-		for i, _ in enumerate(self.data["vars"]):
-			if self.data["vars"][i]["name"] == var_name: 
-				self.data["vars"][i]["value"] = var_val
-				return
-		self.data["vars"] += [{"name": var_name, "value": var_val, "editable": False}]
+		self.get_data().get_by_name("vars").set_value(var_name, {"name": var_name, "value": var_val, "editable": False})
 	
 
 	def call_action(self, action):
-		self.get_app().call_action(action, [self.get_variable(v) for v in action["parameters"]])
+		self.get_app().call_action(action, [self.get_variable(v) for v in action.get_by_name("parameters")])
 
 
 	def get_actions(self):
-		return self.data["actions"]
+		return self.get_data().get_by_name("actions")
 	
 	def get_action(self, action_name):
-		return self.data["actions"][action_name]
+		return self.get_data().get_by_path(["actions", action_name])
 
 
 	def get_display_elements(self):
-		return self.data["display_elements"]
+		return self.get_data().get_by_name("display_elements")
 	
 	def clear_display_elements(self):
-		self.data["display_elements"] = []
+		self.get_data().set_value("display_elements", {})
 	
-	def append_display_element(self, d):
-		self.data["display_elements"] += [d]
+	def append_display_element(self, name, display_element):
+		self.get_data().get_by_value("display_elements").set_value(name, display_element)
 	
 
 	def __str__(self):
-		return str(self.data)
+		return str(self.get_data())
 	
 
 	@abstractmethod

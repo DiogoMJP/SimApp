@@ -4,6 +4,7 @@ from tkinter import filedialog
 import tkinter as tk
 
 from Consts import *
+from data_objects import DataObject
 from display_modules import Canvas, StructuredDisplay
 
 
@@ -69,9 +70,9 @@ class SimApp():
 
 		module = importlib.import_module(self.open_file_name.split(".")[0])
 		self.package = module.Package(self)
-		self.display_modules = self.package.get_display_modules()
-		for display_module in self.display_modules:
-			self.display_module_objects[display_module["name"]] = self.display_modules_from_type_string[display_module["type"]](self, self.frame, display_module)
+		self.display_modules = DataObject.DataObject(self.package.get_display_modules())
+		for key, display_module in self.display_modules.get_items():
+			self.display_module_objects[key] = self.display_modules_from_type_string[display_module.get_by_name("type")](self, self.frame, display_module)
 		self.set_active_display_module(self.package.get_active_display_module())
 	
 
@@ -81,15 +82,23 @@ class SimApp():
 	
 	def set_actions(self):
 		self.actionmenu.delete(0, "end")
-		actions = self.display_module_objects[self.active_display_module].get_actions()
-		for key in actions.keys():
-			self.actionmenu.add_command(label=key, command=lambda key=key: self.display_module_objects[self.active_display_module].call_action(actions[key]))
+		actions = self.get_active_display_module().get_data().get_by_name("actions")
+		for _, action in actions.get_items():
+			self.actionmenu.add_command(label=action.get_by_name("label"), command=lambda action=action: self.get_active_display_module().call_action(action))
+
+	def get_active_display_module(self):
+		return self.display_module_objects[self.active_display_module]
 
 	def set_active_display_module(self, module_name):
 		self.active_display_module = module_name
 		self.clear_window()
-		self.display_module_objects[self.active_display_module].display_self()
+		self.get_active_display_module().display_self()
+
 		self.set_actions()
+	
+
+	def get_data(self):
+		return self.display_modules
 
 
 	def set_variables_window(self):

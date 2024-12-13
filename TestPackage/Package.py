@@ -29,13 +29,15 @@ class Package():
 	
 
 	def call_action(self, action, vars):
-		self.actions[action["name"]](vars)
+		self.actions[action.get_by_name("name")](vars)
 
 	def new_text(self, vars):
-		self.display_modules["Text Editor"]["vars"]["id"] = vars[0]
+		self.app.get_data().get_by_path(["Text Editor", "vars", "id"]).set_value("value", vars[0])
+		self.app.get_data().get_by_path(["Text Editor", "vars", "title"]).set_value("value", "")
+		self.app.get_data().get_by_path(["Text Editor", "vars", "text"]).set_value("value", "")
 		self.active_display_module = "Text Editor"
 		self.app.set_active_display_module("Text Editor")
-
+		
 	def delete_text(self, vars):
 		pass
 
