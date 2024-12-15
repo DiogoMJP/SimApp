@@ -70,10 +70,6 @@ class SimApp():
 
 		module = importlib.import_module(self.open_file_name.split(".")[0])
 		self.package = module.Package(self)
-		self.display_modules = DataObject.DataObject(self.package.get_display_modules())
-		for key, display_module in self.display_modules.get_items():
-			self.display_module_objects[key] = self.display_modules_from_type_string[display_module.get_by_name("type")](self, self.frame, display_module)
-		self.set_active_display_module(self.package.get_active_display_module())
 	
 
 	def clear_window(self):
@@ -91,13 +87,19 @@ class SimApp():
 
 	def get_active_display_module(self):
 		return self.get_display_module(self.active_display_module)
+	
+	def set_display_modules(self, display_modules):
+		self.display_modules = DataObject.DataObject(display_modules)
+		for key, display_module in self.display_modules.get_items():
+			self.display_module_objects[key] = self.display_modules_from_type_string[display_module.get_by_name("type")](self, self.frame, display_module)
 
 	def set_active_display_module(self, module_name):
 		self.active_display_module = module_name
+		self.set_actions()
+	
+	def display_active_display_module(self):
 		self.clear_window()
 		self.get_active_display_module().display_self()
-
-		self.set_actions()
 	
 
 	def get_data(self):
