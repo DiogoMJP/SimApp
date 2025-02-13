@@ -49,8 +49,6 @@ class SimApp():
 		self.actionmenu = tk.Menu(menu)
 		menu.add_cascade(label="Run Action", menu=self.actionmenu)
 		popupmenu = tk.Menu(menu)
-		popupmenu.add_cascade(label="Pop Ups", menu=popupmenu)
-		tk.Label(popupmenu, text="None Available")
 		helpmenu = tk.Menu(menu)
 		menu.add_cascade(label="Help", menu=helpmenu)
 		helpmenu.add_command(label="About")
