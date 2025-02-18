@@ -1,10 +1,3 @@
-import json
-import os
-
-
-package = None
-
-
 class Package():
 	def __init__(self, app):
 		self.app = app
@@ -53,6 +46,10 @@ class Package():
 	
 	def __str__(self):
 		return str(self.display_modules)
+
+
+
+package = None
 
 
 def launch(app):
