@@ -5,12 +5,11 @@ from display_elements import DisplayElement
 
 
 class Card(DisplayElement.DisplayElement):
-    def __init__(self, page, parent, data):
-        super().__init__(page, parent, data)
+    def __init__(self, page, data):
+        super().__init__(page, data)
     
 
-    def display_self(self):
-        parent = self.get_parent()
+    def display_self(self, parent):
         self.frame = tk.Frame(parent, highlightbackground="black", highlightthickness=1, background="white")
         for _, var in self.get_value("vars").get_items():
             if (label := var.get_by_name("label")) != None:

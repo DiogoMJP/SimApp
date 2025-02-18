@@ -34,7 +34,7 @@ class Package():
 		}
 
 	def save_text(self, vars):
-		self.app.get_page("text_list").append_display_element(vars["id"],
+		self.app.get_page("text_list").get_display_element("text_frame").append_display_element(vars["id"],
 			self.get_card_data(vars["id"], vars["title"], vars["text"]))
 		self.app.get_data().get_by_path(["pages", "text_list", "vars", "id"]).set_value("value", vars["id"] + 1)
 		self.app.set_active_page("text_list")

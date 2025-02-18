@@ -5,12 +5,11 @@ from display_elements import DisplayElement
 
 
 class TextInput(DisplayElement.DisplayElement):
-    def __init__(self, page, parent, data):
-        super().__init__(page, parent, data)
+    def __init__(self, page, data):
+        super().__init__(page, data)
     
 
-    def display_self(self):
-        parent = self.get_parent()
+    def display_self(self, parent):
         label = self.get_value("label")
         if (label != None):
             self.label = tk.Label(parent, text=label + ":")

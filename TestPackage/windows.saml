@@ -13,7 +13,10 @@
                 "new_text" : {"id": "new_text", "text": "New Text", "parameters": ["id"]},
                 "delete_text" : {"id": "delete_text", "text": "Delete Text", "parameters": []}
             },
-            "layout" : {}
+            "layout" : {
+                "text_frame" : {"id": "text_frame", "type": "Frame", "layout": {}},
+                "new_text_button" : {"id": "new_text_button", "text": "New Text", "type": "Button", "on_click": {"id": "new_text", "parameters": ["id"]}}
+            }
         },
         "text_editor" : {
             "text" : "Text Editor",

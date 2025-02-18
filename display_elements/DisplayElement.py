@@ -3,20 +3,13 @@ from abc import ABC, abstractmethod
 
 
 class DisplayElement(ABC):
-    def __init__(self, page, parent, data):
+    def __init__(self, page, data):
         self.page = page
-        self.parent = parent
         self.data = data
-
-        self.display_self()
     
 
     def get_page(self):
         return self.page
-    
-
-    def get_parent(self):
-        return self.parent
 
 
     def get_data(self):
@@ -34,5 +27,5 @@ class DisplayElement(ABC):
     
 
     @abstractmethod
-    def display_self(self):
+    def display_self(self, parent):
         pass

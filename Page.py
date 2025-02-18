@@ -1,7 +1,7 @@
 import tkinter as tk
 
 from data_objects import DataObject
-from display_elements import Button, Card, TextInput
+from display_elements import Button, Card, Frame, TextInput
 
 
 class Page():
@@ -10,12 +10,17 @@ class Page():
 		self.parent = parent
 		self.data = data
 
+		self.frame = None
+
 		self.display_element_from_type_string = {
             "Button" : Button.Button,
             "Card" : Card.Card,
+			"Frame" : Frame.Frame,
             "TextInput" : TextInput.TextInput
         }
 		self.display_elements = {}
+
+		self.create_display_elements()
 	
 
 	def get_app(self):
@@ -55,16 +60,33 @@ class Page():
 		return self.get_data().get_by_path(["actions", action_name])
 
 
-	def get_display_elements(self):
+	def get_display_elements_data(self):
 		return self.get_data().get_by_name("layout")
+	
+	def get_display_element_data(self, id):
+		return self.get_display_elements_data().get_by_name(id)
 	
 	def clear_display_elements(self):
 		self.get_data().set_value("layout", {})
+		self.display_elements = {}
 	
-	def append_display_element(self, name, display_element):
-		if type(display_element) == dict:
-			display_element = DataObject.DataObject(display_element)
-		self.get_data().get_by_name("layout").set_value(name, display_element)
+	def create_display_elements(self):
+		for name, data in self.get_display_elements_data().get_items():
+			self.display_elements[name] = \
+				self.display_element_from_type_string[data.get_by_name("type")](self, data)
+	
+	def get_display_elements(self):
+		return self.display_elements
+	
+	def get_display_element(self, id):
+		return self.get_display_elements()[id]
+
+	def append_display_element(self, name, data):
+		if type(data) == dict:
+			data = DataObject.DataObject(data)
+		self.get_data().get_by_name("layout").set_value(name, data)
+		self.display_elements[name] = \
+			self.display_element_from_type_string[data.get_by_name("type")](self, data)
 	
 
 	def __str__(self):
@@ -72,7 +94,7 @@ class Page():
 
 
 	def display_self(self):
-		self.frame = tk.Frame(self.parent)
-		for name, display_element in self.get_display_elements().get_items():
-			self.display_elements[name] = self.display_element_from_type_string[display_element.get_by_name("type")](self, self.frame, display_element)
+		self.frame = tk.Frame(self.get_parent())
+		for _, display_element in self.get_display_elements().items():
+			display_element.display_self(self.frame)
 		self.frame.pack(expand=True, fill="both")
