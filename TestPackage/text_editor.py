@@ -24,12 +24,12 @@ class Package():
 
 	def get_card_data(self, id, title, text):
 		return {
-			"name" : id,
+			"id" : id,
 			"type" : "Card",
 			"vars" : {
-				"id": {"name": "id", "label": "ID", "value": id},
-				"title": {"name": "title", "label": "Title", "value": title},
-				"text": {"name": "text", "label": "Text", "value": text}
+				"id": {"id": "id", "text": "ID", "value": id},
+				"title": {"id": "title", "text": "Title", "value": title},
+				"text": {"id": "text", "text": "Text", "value": text}
 			}
 		}
 

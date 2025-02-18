@@ -57,4 +57,4 @@ class Frame(DisplayElement.DisplayElement):
 		self.frame = tk.Frame(parent)
 		for _, display_element in self.get_display_elements().items():
 			display_element.display_self(self.frame)
-		self.frame.pack()
+		self.frame.pack(fill="x")

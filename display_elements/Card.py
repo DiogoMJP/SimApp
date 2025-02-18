@@ -12,9 +12,9 @@ class Card(DisplayElement.DisplayElement):
     def display_self(self, parent):
         self.frame = tk.Frame(parent, highlightbackground="black", highlightthickness=1, background="white")
         for _, var in self.get_value("vars").get_items():
-            if (label := var.get_by_name("label")) != None:
+            if (label := var.get_by_name("text")) != None:
                 label = str(label) + ": "
             else: 
                 label = ""
             tk.Label(self.frame, text=label+str(var.get_by_name("value")), background="white").pack()
-        self.frame.pack()
+        self.frame.pack(fill="x")
