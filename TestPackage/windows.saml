@@ -1,0 +1,36 @@
+{
+    "launch_file" : "text_editor",
+    "launch_function" : "launch",
+    "call_action_function" : "call_action",
+    "starting_page" : "text_list",
+    "pages" : {
+        "text_list" : {
+            "text" : "Text List",
+            "vars" : {
+                "id" : {"id": "id", "value": 0, "editable": false}
+            },
+            "actions" : {
+                "new_text" : {"id": "new_text", "text": "New Text", "parameters": ["id"]},
+                "delete_text" : {"id": "delete_text", "text": "Delete Text", "parameters": []}
+            },
+            "layout" : {}
+        },
+        "text_editor" : {
+            "text" : "Text Editor",
+            "vars" : {
+                "id" : {"id": "id", "value": 0, "editable": false},
+                "title" : {"id": "title", "value": "", "editable": false},
+                "text" : {"id": "text", "value": "", "editable": false}
+            },
+            "actions" : {
+                "save_text" : {"id": "save_text", "text": "Save Text", "parameters": ["id", "title", "text"]},
+                "exit_editor" : {"id": "exit_editor", "text": "Exit Editor", "parameters": []}
+            },
+            "layout" : {
+                "title_input" : {"id": "title_input", "text": "Title", "type": "TextInput", "var": "title", "min": 1, "max": 16, "n_lines": 1},
+                "text_input" : {"id": "text_input", "type": "TextInput", "var": "text", "min": 1, "max": 2048, "n_lines": 16},
+                "submit_button" : {"id": "submit_button", "text": "Save File", "type": "Button", "on_click": {"id": "save_text", "parameters": ["id", "title", "text"]}}
+            }
+        }
+    }
+}
