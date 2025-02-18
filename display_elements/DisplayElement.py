@@ -3,16 +3,16 @@ from abc import ABC, abstractmethod
 
 
 class DisplayElement(ABC):
-    def __init__(self, display_module, parent, data):
-        self.display_module = display_module
+    def __init__(self, page, parent, data):
+        self.page = page
         self.parent = parent
         self.data = data
 
         self.display_self()
     
 
-    def get_display_module(self):
-        return self.display_module
+    def get_page(self):
+        return self.page
     
 
     def get_parent(self):
@@ -30,7 +30,7 @@ class DisplayElement(ABC):
     
 
     def set_variable(self, value):
-        self.get_display_module().set_variable(self.get_value("var"), value)
+        self.get_page().set_variable(self.get_value("var"), value)
     
 
     @abstractmethod

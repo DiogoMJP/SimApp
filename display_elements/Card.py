@@ -5,8 +5,8 @@ from display_elements import DisplayElement
 
 
 class Card(DisplayElement.DisplayElement):
-    def __init__(self, display_module, parent, data):
-        super().__init__(display_module, parent, data)
+    def __init__(self, page, parent, data):
+        super().__init__(page, parent, data)
     
 
     def display_self(self):

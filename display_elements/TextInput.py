@@ -5,8 +5,8 @@ from display_elements import DisplayElement
 
 
 class TextInput(DisplayElement.DisplayElement):
-    def __init__(self, display_module, parent, data):
-        super().__init__(display_module, parent, data)
+    def __init__(self, page, parent, data):
+        super().__init__(page, parent, data)
     
 
     def display_self(self):
@@ -19,7 +19,7 @@ class TextInput(DisplayElement.DisplayElement):
             self.label = None
         self.input = tk.Entry(parent)
         self.input.bind("<KeyRelease>", self.validate)
-        self.input.insert(0, self.get_display_module().get_variable_value(self.get_value("var")))
+        self.input.insert(0, self.get_page().get_variable_value(self.get_value("var")))
         self.input.pack()
     
 

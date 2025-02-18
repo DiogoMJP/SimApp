@@ -5,8 +5,8 @@ from display_elements import DisplayElement
 
 
 class Button(DisplayElement.DisplayElement):
-    def __init__(self, display_module, parent, data):
-        super().__init__(display_module, parent, data)
+    def __init__(self, page, parent, data):
+        super().__init__(page, parent, data)
     
 
     def display_self(self):
@@ -16,4 +16,4 @@ class Button(DisplayElement.DisplayElement):
 
 
     def call_action(self):
-        self.get_display_module().call_action(self.get_value("on_click"))
+        self.get_page().call_action(self.get_value("on_click"))
