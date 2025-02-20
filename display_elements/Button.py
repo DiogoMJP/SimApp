@@ -1,5 +1,5 @@
 import tkinter as tk
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from data_objects import DataObject
 from display_elements import DisplayElement
