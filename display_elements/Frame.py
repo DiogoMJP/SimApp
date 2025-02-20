@@ -148,7 +148,7 @@ class Frame(DisplayElement.DisplayElement):
 
 		Returns
 		-------
-		DisplayElement.DisplayElement
+		display_elements.DisplayElement.DisplayElement
 			the display element associated with the given identifier
 		"""
 
@@ -162,7 +162,7 @@ class Frame(DisplayElement.DisplayElement):
 		---------
 		id : str
 			unique identifier for the display element
-		data : dict | DataObject
+		data : dict | data_objects.DataObject.DataObject
 			data associated with the display element
 		"""
 
