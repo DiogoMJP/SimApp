@@ -139,13 +139,13 @@ class SimApp(object):
 		with open(path, "r") as file:
 			self.data = DataObject.DataObject(json.load(file))
 		
-		module = importlib.import_module(self.data.get_by_name("launch_file"))
-		getattr(module, self.data.get_by_name("launch_function"))(self)
-		self.call_action = getattr(module, self.data.get_by_name("call_action_function"))
-		for id, data in self.data.get_by_name("pages").get_items():
+		module = importlib.import_module(self.data.get_by_id("launch_file"))
+		getattr(module, self.data.get_by_id("launch_function"))(self)
+		self.call_action = getattr(module, self.data.get_by_id("call_action_function"))
+		for id, data in self.data.get_by_id("pages").get_items():
 			self.pages[id] = Page.Page(self, self.frame, data)
 		
-		self.set_active_page(self.data.get_by_name("starting_page"))
+		self.set_active_page(self.data.get_by_id("starting_page"))
 
 		self.display_self()
 	
@@ -168,7 +168,7 @@ class SimApp(object):
 		self.actionmenu.delete(0, "end")
 		actions = self.get_page(self.get_active_page()).get_actions()
 		for _, action in actions.get_items():
-			self.actionmenu.add_command(label=action.get_by_name("text"),
+			self.actionmenu.add_command(label=action.get_by_id("text"),
 								command=lambda action=action: self.get_page(self.get_active_page()).call_action(action))
 
 

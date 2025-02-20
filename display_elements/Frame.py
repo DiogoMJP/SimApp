@@ -23,10 +23,10 @@ class Frame(DisplayElement.DisplayElement):
 	
 
 	def get_display_elements_data(self):
-		return self.get_data().get_by_name("layout")
+		return self.get_data().get_by_id("layout")
 	
 	def get_display_element_data(self, id):
-		return self.get_display_elements_data().get_by_name(id)
+		return self.get_display_elements_data().get_by_id(id)
 	
 	def clear_display_elements(self):
 		for widget in self.frame.winfo_children():
@@ -37,7 +37,7 @@ class Frame(DisplayElement.DisplayElement):
 	def create_display_elements(self):
 		for name, data in self.get_display_elements_data().get_items():
 			self.display_elements[name] = \
-				self.display_element_from_type_string[data.get_by_name("type")](self.get_page(), data)
+				self.display_element_from_type_string[data.get_by_id("type")](self.get_page(), data)
 	
 	def get_display_elements(self):
 		return self.display_elements
@@ -48,9 +48,9 @@ class Frame(DisplayElement.DisplayElement):
 	def append_display_element(self, name, data):
 		if type(data) == dict:
 			data = DataObject.DataObject(data)
-		self.get_data().get_by_name("layout").set_value(name, data)
+		self.get_data().get_by_id("layout").set_value(name, data)
 		self.display_elements[name] = \
-				self.display_element_from_type_string[data.get_by_name("type")](self.get_page(), data)
+				self.display_element_from_type_string[data.get_by_id("type")](self.get_page(), data)
 	
 
 	def display_self(self, parent):

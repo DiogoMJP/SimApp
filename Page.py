@@ -154,7 +154,7 @@ class Page(object):
 			a DataObject containing the internal state variables stored in 'data'
 		"""
 
-		return self.get_data().get_by_name("vars")
+		return self.get_data().get_by_id("vars")
 
 	def get_variable(self, var_id: str) -> DataObject.DataObject:
 		"""
@@ -198,11 +198,11 @@ class Page(object):
 		---------
 		var_id : str
 			the identifier of the variable to set
-		var_val : any
+		var_val : Any
 			the value to assign to the variable
 		"""
 		
-		self.get_data().get_by_name("vars").set_value(var_id, {"name": var_id, "value": var_val, "editable": False})
+		self.get_data().get_by_id("vars").set_value(var_id, {"name": var_id, "value": var_val, "editable": False})
 	
 
 	def call_action(self, action: DataObject.DataObject) -> None:
@@ -217,9 +217,9 @@ class Page(object):
 		"""
 		
 		vars = {}
-		for v in action.get_by_name("parameters"):
-			vars[v] = self.get_variable(v).get_by_name("value")	
-		self.get_app().call_action(action.get_by_name("id"), vars)
+		for v in action.get_by_id("parameters"):
+			vars[v] = self.get_variable(v).get_by_id("value")	
+		self.get_app().call_action(action.get_by_id("id"), vars)
 
 
 	def get_actions(self) -> DataObject.DataObject:
@@ -232,7 +232,7 @@ class Page(object):
 			the 'actions' DataObject
 		"""
 		
-		return self.get_data().get_by_name("actions")
+		return self.get_data().get_by_id("actions")
 	
 	def get_action(self, action_id: str) -> DataObject.DataObject:
 		"""
@@ -262,7 +262,7 @@ class Page(object):
 			the data object containing the display elements data
 		"""
 
-		return self.get_data().get_by_name("layout")
+		return self.get_data().get_by_id("layout")
 	
 	def get_display_element_data(self, display_element_id: str) -> DataObject.DataObject:
 		"""
@@ -279,7 +279,7 @@ class Page(object):
 			the data object associated with the given display element id
 		"""
 
-		return self.get_display_elements_data().get_by_name(display_element_id)
+		return self.get_display_elements_data().get_by_id(display_element_id)
 	
 	def clear_display_elements(self) -> None:
 		"""
@@ -296,7 +296,7 @@ class Page(object):
 		
 		for name, data in self.get_display_elements_data().get_items():
 			self.display_elements[name] = \
-				self.display_element_from_type_string[data.get_by_name("type")](self, data)
+				self.display_element_from_type_string[data.get_by_id("type")](self, data)
 	
 	def get_display_elements(self) -> dict[str, DisplayElement.DisplayElement]:
 		"""
@@ -327,7 +327,7 @@ class Page(object):
 		
 		return self.get_display_elements()[id]
 
-	def append_display_element(self, id: str, data: dict | DataObject.DataObject) -> None:
+	def append_display_element(self, id: str, data: (dict | DataObject.DataObject)) -> None:
 		"""
 		Appends a display element to the display elements dictionary.
 
@@ -335,15 +335,15 @@ class Page(object):
 		---------
 		id : str
 			the id of the display element
-		data : dict | DataObject.DataObject
+		data : (dict | DataObject.DataObject)
 			the data associated with the display element
 		"""
 
 		if type(data) == dict:
 			data = DataObject.DataObject(data)
-		self.get_data().get_by_name("layout").set_value(id, data)
+		self.get_data().get_by_id("layout").set_value(id, data)
 		self.display_elements[id] = \
-			self.display_element_from_type_string[data.get_by_name("type")](self, data)
+			self.display_element_from_type_string[data.get_by_id("type")](self, data)
 	
 
 	def __str__(self) -> str:

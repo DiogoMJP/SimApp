@@ -16,7 +16,7 @@ class DisplayElement(ABC):
         return self.data
 
     def get_value(self, var_name):
-        return self.get_data().get_by_name(var_name)
+        return self.get_data().get_by_id(var_name)
 
     def set_value(self, var_name, value):
         self.get_data().set_value(var_name, value)
