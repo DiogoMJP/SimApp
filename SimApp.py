@@ -44,8 +44,6 @@ class SimApp(object):
 
 	Methods
 	-------
-	__init__()
-		initializes the SimApp instance and creates the main window
 	create_window()
 		creates the main application window and its components
 	open_file()
