@@ -1,8 +1,9 @@
+from __future__ import annotations
 import tkinter as tk
 from typing import TYPE_CHECKING
 
 from data_objects import DataObject
-from display_elements import Button, Card, TextInput, DisplayElement
+from display_elements import Button, Canvas, Card, TextInput, DisplayElement
 if TYPE_CHECKING:
     import Page
 
@@ -60,6 +61,7 @@ class Frame(DisplayElement.DisplayElement):
 
 		self.display_element_from_type_string = {
             "Button" : Button.Button,
+			"Canvas" : Canvas.Canvas,
             "Card" : Card.Card,
 			"Frame" : Frame,
             "TextInput" : TextInput.TextInput

@@ -14,6 +14,7 @@
                 "delete_text" : {"id": "delete_text", "text": "Delete Text", "parameters": []}
             },
             "layout" : {
+                "canvas" : {"id": "canvas", "type": "Canvas", "canvas_elements": {}},
                 "text_frame" : {"id": "text_frame", "type": "Frame", "layout": {}},
                 "new_text_button" : {"id": "new_text_button", "text": "New Text", "type": "Button", "on_click": {"id": "new_text", "parameters": ["id"]}}
             }

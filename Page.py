@@ -1,9 +1,10 @@
+from __future__ import annotations
 import tkinter as tk
 from typing import TYPE_CHECKING, Any
 
 
 from data_objects import DataObject
-from display_elements import Button, Card, DisplayElement, Frame, TextInput
+from display_elements import Button, Canvas, Card, DisplayElement, Frame, TextInput
 if TYPE_CHECKING:
     import SimApp
 
@@ -98,6 +99,7 @@ class Page(object):
 
 		self.display_element_from_type_string = {
             "Button" : Button.Button,
+			"Canvas" : Canvas.Canvas,
             "Card" : Card.Card,
 			"Frame" : Frame.Frame,
             "TextInput" : TextInput.TextInput
