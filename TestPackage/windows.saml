@@ -14,7 +14,10 @@
                 "delete_text" : {"id": "delete_text", "text": "Delete Text", "parameters": []}
             },
             "layout" : {
-                "canvas" : {"id": "canvas", "type": "Canvas", "canvas_elements": {}},
+                "canvas" : {"id": "canvas", "type": "Canvas", "canvas_elements": {
+                    "rect": {"id": "rect", "type": "Rectangle", "points": [[-100, -100], [100, 100]], "fill": "red"},
+                    "line": {"id": "line", "type": "Line", "points": [[150, 150], [500, 200]], "fill": "blue"}
+                }},
                 "text_frame" : {"id": "text_frame", "type": "Frame", "layout": {}},
                 "new_text_button" : {"id": "new_text_button", "text": "New Text", "type": "Button", "on_click": {"id": "new_text", "parameters": ["id"]}}
             }
