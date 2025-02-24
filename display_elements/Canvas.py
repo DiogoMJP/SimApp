@@ -1,5 +1,6 @@
 import tkinter as tk
 
+from canvas_elements import Line, Rectangle
 from data_objects import DataObject
 from display_elements import DisplayElement
 
@@ -19,10 +20,13 @@ class Canvas(DisplayElement.DisplayElement):
 		self.start_drag_y = 0
 		self.canvas = None
 
-		self.draw_funcs = {
-			"Line" : lambda d : self.draw_line(d.get_by_id("points"), d.get_by_id("fill"), d.get_by_id("dash")),
-			"Rectangle" : lambda d : self.draw_rectangle(d.get_by_id("points"), d.get_by_id("fill"))
-		}
+		self.canvas_element_from_type_string = {
+            "Line": Line.Line,
+			"Rectangle": Rectangle.Rectangle
+        }
+		self.canvas_elements = {}
+
+		self.create_canvas_elements()
 	
 	
 	def display_self(self, parent):
@@ -55,35 +59,36 @@ class Canvas(DisplayElement.DisplayElement):
 	
 	def render(self):
 		self.canvas.delete("all")
-		for d in self.get_display_elements().get_items():
-			self.draw_funcs[d[1].get_by_id("type")](d[1])
+		for _, canvas_element in self.get_canvas_elements().items():
+			canvas_element.display_self(self.canvas, self.width, self.height, self.x, self.y, self.zoom)
+
 	
-	def draw_line(self, points, fill="#000", dash=(1, 0)):
-		midpoint = (self.width // 2, self.height // 2)
-		points = [
-			(self.x + midpoint[0] + (x - midpoint[0]) * self.zoom,
-			 self.y + midpoint[1] + (y - midpoint[1]) * self.zoom)
-			 for x, y in points
-		]
-		self.canvas.create_line(points, fill=fill, dash=dash)
-
-	def draw_rectangle(self, points, fill="#000"):
-		midpoint = (self.width // 2, self.height // 2)
-		points = [
-			(self.x + midpoint[0] + (x - midpoint[0]) * self.zoom,
-			 self.y + midpoint[1] + (y - midpoint[1]) * self.zoom)
-			 for x, y in points
-		]
-		self.canvas.create_rectangle(points, fill=fill)
-
-
-	def get_display_elements(self):
+	def get_canvas_elements_data(self):
 		return self.get_data().get_by_id("canvas_elements")
 	
-	def clear_display_elements(self):
-		self.get_data().set_value("canvas_elements", {})
+	def get_canvas_element_data(self, id):
+		return self.get_canvas_elements_data().get_by_id(id)
 	
-	def append_display_element(self, name, display_element):
-		if type(display_element) == dict:
-			display_element = DataObject.DataObject(display_element)
-		self.get_data().get_by_id("canvas_elements").set_value(name, display_element)
+	def clear_canvas_elements(self):
+		for widget in self.frame.winfo_children():
+			widget.destroy()
+		self.get_data().set_value("canvas_elements", {})
+		self.canvas_elements = {}
+	
+	def create_canvas_elements(self):
+		for name, data in self.get_canvas_elements_data().get_items():
+			self.canvas_elements[name] = \
+				self.canvas_element_from_type_string[data.get_by_id("type")](self.get_page(), data)
+	
+	def get_canvas_elements(self):
+		return self.canvas_elements
+	
+	def get_canvas_element(self, id):
+		return self.get_canvas_elements()[id]
+
+	def append_canvas_element(self, id, data):
+		if type(data) == dict:
+			data = DataObject.DataObject(data)
+		self.get_data().get_by_id("canvas_elements").set_value(id, data)
+		self.canvas_elements[id] = \
+				self.canvas_element_from_type_string[data.get_by_id("type")](self.get_page(), data)

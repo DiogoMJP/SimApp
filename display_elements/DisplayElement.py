@@ -39,13 +39,13 @@ class DisplayElement(ABC):
         abstract method to display the element on the given parent
     """
 
-    def __init__(self, page: Page, data: DataObject.DataObject) -> None:
+    def __init__(self, page: Page.Page, data: DataObject.DataObject) -> None:
         """
         Initializes a DisplayElement with the given page and data.
 
         Arguments
         ---------
-        page : Page
+        page : Page.Page
             the page where the display element will be shown
         data : DataObject.DataObject
             the data object associated with the display element
