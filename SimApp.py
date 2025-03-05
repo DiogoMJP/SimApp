@@ -11,66 +11,7 @@ from data_objects import DataObject
 
 
 class SimApp(object):
-	"""
-	SimApp is a class that represents a simulation application with a graphical user interface (GUI).
-	It allows users to open files, set variables, and navigate through different pages of the application.
-
-	Attributes
-	----------
-	title : str
-		the title of the application window
-	width : int
-		the width of the application window
-	height : int
-		the height of the application window
-	open_dir_path : str or None
-		the directory path of the opened file
-	open_file_name : str or None
-		the name of the opened file
-	data : DataObject or None
-		the data object loaded from the opened file
-	call_action : function or None
-		the function to call an action
-	pages : dict
-		a dictionary of pages in the application
-	active_page : str or None
-		the currently active page
-	window : tk.Tk
-		the main application window
-	frame : tk.Frame
-		the main frame within the application window
-	actionmenu : tk.Menu
-		the menu for running actions
-
-	Methods
-	-------
-	create_window()
-		creates the main application window and its components
-	open_file()
-		opens a file dialog to select a file and loads its data
-	clear_window()
-		clears all widgets from the main frame
-	set_actions()
-		sets the actions available in the action menu based on the active page
-	get_active_page()
-		returns the name of the currently active page
-	get_page(page_name)
-		returns the page object for the given page name
-	set_active_page(page_name)
-		sets the active page to the given page name and updates the actions
-	display_self()
-		clears the window and displays the active page
-	get_data()
-		returns the data object loaded from the opened file
-	set_variables_window()
-		opens a new window to set variables
-	"""
-	
 	def __init__(self) -> None:
-		"""
-		Initializes the application with default settings and creates the main window.
-		"""
-
 		self.title = Consts.APP_TITLE
 		self.width = Consts.APP_WIDTH
 		self.height = Consts.APP_HEIGHT
@@ -88,13 +29,6 @@ class SimApp(object):
 	
 
 	def create_window(self) -> None:
-		"""
-		Creates the main application window with a menu and a frame.
-		The window includes a title, background color, and geometry settings.
-		It also sets up a menu with options for file operations, setting variables,
-		running actions, and accessing help information.
-		"""
-
 		self.window = tk.Tk()
 		self.window.title(self.title)
 		self.window.configure(background="white")
@@ -121,11 +55,6 @@ class SimApp(object):
 	
 
 	def open_file(self) -> None:
-		"""
-		Opens a file dialog to select a .saml file, loads its content, and initializes the application
-		with the data from the file.
-		"""
-		
 		path = filedialog.askopenfilename(title='Open a File', filetypes=(('SAML File', '.saml'),))
 		
 		if self.open_dir_path != None:
@@ -149,20 +78,10 @@ class SimApp(object):
 	
 
 	def clear_window(self) -> None:
-		"""
-		Clears all widgets from the frame.
-		This method iterates over all child widgets of the frame and destroys them.
-		"""
-
 		for widget in self.frame.winfo_children():
 			widget.destroy()
 	
 	def set_actions(self) -> None:
-		"""
-		Sets the actions for the action menu by retrieving the actions from the active page and adding
-		them as commands to the menu.
-		"""
-		
 		self.actionmenu.delete(0, "end")
 		actions = self.get_page(self.get_active_page()).get_actions()
 		for _, action in actions.get_items():
@@ -171,74 +90,25 @@ class SimApp(object):
 
 
 	def get_active_page(self) -> Page.Page:
-		"""
-		Returns the currently active page in the application.
-
-		Returns
-		-------
-		Page.Page
-			the active page object
-		"""
-		
 		return self.active_page
 
 	def get_page(self, page_id: str) -> Page.Page:
-		"""
-		Retrieves a Page instance based on the provided page_id.
-		
-		Arguments
-		---------
-		page_id : str
-			the identifier of the page to retrieve
-		
-		Returns
-		-------
-		Page.Page
-			the Page object corresponding to the given page_id
-		"""
-		
 		return self.pages[page_id]
 	
 	def set_active_page(self, page_id: str) -> None:
-		"""
-		Sets the active page to the given page id and updates the actions accordingly.
-
-		Arguments
-		---------
-		page_id : str
-			the id of the page to be set as active
-		"""
-
 		self.active_page = page_id
 		self.set_actions()
 	
 	def display_self(self) -> None:
-		"""
-		Displays the current active page by clearing the window and invoking the display method of the active page.
-		"""
-
 		self.clear_window()
 		self.get_page(self.get_active_page()).display_self()
 	
 
 	def get_data(self) -> DataObject.DataObject:
-		"""
-		Retrieves the DataObject associated with this application.
-
-		Returns
-		-------
-		data_objects.DataObject.DataObject
-			the DataObject associated with this instance
-		"""
-
 		return self.data
 
 
 	def set_variables_window(self) -> None:
-		"""
-		Creates a pop-up window for setting variables
-		"""
-
 		pop_up = tk.Toplevel(self.window)
 		pop_up.title("Set Variables")
 		pop_up.geometry("400x300")

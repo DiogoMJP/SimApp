@@ -18,7 +18,7 @@ class CanvasElement(ABC):
 	def get_value(self, id: str):
 		return self.get_data().get_by_id(id)
 	
-	
+
 	@abstractmethod
 	def display_self(self, canvas, width, height, x, y, zoom):
 		pass
