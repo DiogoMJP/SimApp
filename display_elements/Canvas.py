@@ -52,8 +52,8 @@ class Canvas(DisplayElement.DisplayElement):
 		self.start_drag_y = event.y
 
 	def canvas_drag(self, event):
-		self.x = self.x + event.x - self.start_drag_x
-		self.y = self.y + event.y - self.start_drag_y
+		self.x = self.x + (event.x - self.start_drag_x) / self.zoom
+		self.y = self.y + (event.y - self.start_drag_y) / self.zoom
 		self.start_drag_x = event.x
 		self.start_drag_y = event.y
 		self.render()
