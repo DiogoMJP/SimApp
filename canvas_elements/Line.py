@@ -16,4 +16,4 @@ class Line(CanvasElement.CanvasElement):
 		]
 		fill = self.get_value("fill"),
 		dash = self.get_value("dash")
-		canvas.create_line(points, fill=fill, dash=dash)
+		canvas.create_line(points, fill=fill, dash=dash, width=1*zoom)

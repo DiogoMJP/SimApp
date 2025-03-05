@@ -15,4 +15,4 @@ class Rectangle(CanvasElement.CanvasElement):
 			 for x, y in self.get_value("points")
 		]
 		fill = self.get_value("fill"),
-		canvas.create_rectangle(points, fill=fill)
+		canvas.create_rectangle(points, fill=fill, width=1*zoom)
