@@ -12,10 +12,10 @@ class Circle(CanvasElement.CanvasElement):
 		center = self.get_value("center")
 		radius = self.get_value("radius")
 		points = [
-			(midpoint[0] + (canvas_x - center[0] + radius) * zoom,
-	            midpoint[1] + (canvas_y - center[1] + radius) * zoom),
-			(midpoint[0] + (canvas_x - center[0] - radius) * zoom,
-	            midpoint[1] + (canvas_y - center[1] - radius) * zoom)
+			(midpoint[0] + (canvas_x + center[0] - radius) * zoom,
+	            midpoint[1] + (canvas_y + center[1] - radius) * zoom),
+			(midpoint[0] + (canvas_x + center[0] + radius) * zoom,
+	            midpoint[1] + (canvas_y + center[1] + radius) * zoom)
 		]
 		fill = self.get_value("fill"),
 		dash = self.get_value("dash")
