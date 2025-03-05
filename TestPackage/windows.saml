@@ -16,6 +16,7 @@
             "layout" : {
                 "canvas" : {"id": "canvas", "type": "Canvas", "canvas_elements": {
                     "rect": {"id": "rect", "type": "Rectangle", "points": [[-100, -100], [100, 100]], "fill": "red"},
+                    "circle": {"id": "circle", "type": "Circle", "center": [150, 150], "radius": 50, "fill": "yellow"},
                     "line": {"id": "line", "type": "Line", "points": [[150, 150], [500, 200]], "fill": "blue"}
                 }},
                 "text_frame" : {"id": "text_frame", "type": "Frame", "layout": {}},

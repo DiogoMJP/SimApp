@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from canvas_elements import Line, Rectangle
+from canvas_elements import Circle, Line, Rectangle
 from data_objects import DataObject
 from display_elements import DisplayElement
 
@@ -21,6 +21,7 @@ class Canvas(DisplayElement.DisplayElement):
 		self.canvas = None
 
 		self.canvas_element_from_type_string = {
+			"Circle": Circle.Circle,
             "Line": Line.Line,
 			"Rectangle": Rectangle.Rectangle
         }
